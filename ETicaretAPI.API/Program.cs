@@ -1,10 +1,15 @@
+using ETicaretAPI.Application.Validators.Products;
+using ETicaretAPI.Infrastucture.Filters;
 using ETicaretAPI.Persistence;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistencesServices();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt=> opt.Filters.Add<ValidationFilter>())
+    .AddFluentValidation(conf=> conf.RegisterValidatorsFromAssemblyContaining<CreateProductValidator>())
+    .ConfigureApiBehaviorOptions(opt=> opt.SuppressModelStateInvalidFilter = true);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
