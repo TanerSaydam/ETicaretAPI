@@ -11,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddPersistencesServices();
 builder.Services.AddInfrastuctureService();
 
-builder.Services.AddStorage<AzureStorage>();
+builder.Services.AddStorage<LocalStorage>();
+//builder.Services.AddStorage<AzureStorage>();
 //builder.Services.AddStorage(ETicaretAPI.Infrastucture.Enums.StorageType.Local);
 
 #pragma warning disable CS0618 // Type or member is obsolete
