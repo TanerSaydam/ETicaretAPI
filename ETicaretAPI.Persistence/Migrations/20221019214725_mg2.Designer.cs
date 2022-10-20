@@ -4,6 +4,7 @@ using ETicaretAPI.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaretAPI.Persistence.Migrations
 {
     [DbContext(typeof(ETicaretAPIDbContext))]
-    partial class ETicaretAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221019214725_mg2")]
+    partial class mg2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,15 +55,6 @@ namespace ETicaretAPI.Persistence.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Storage")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -143,9 +136,6 @@ namespace ETicaretAPI.Persistence.Migrations
             modelBuilder.Entity("ETicaretAPI.Domain.Entities.InvoiceFile", b =>
                 {
                     b.HasBaseType("ETicaretAPI.Domain.Entities.File");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasDiscriminator().HasValue("InvoiceFile");
                 });

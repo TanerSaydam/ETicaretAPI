@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using File = ETicaretAPI.Domain.Entities.File;
 
 namespace ETicaretAPI.Persistence.Context
 {
@@ -19,6 +20,9 @@ namespace ETicaretAPI.Persistence.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<File> Files { get; set; }
+        public DbSet<ProductImageFile> ProductImageFiles { get; set; }
+        public DbSet<InvoiceFile> InvoiceFiles { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -33,8 +37,6 @@ namespace ETicaretAPI.Persistence.Context
                     EntityState.Modified => data.Entity.UpdatedDate = DateTime.Now,
                     _ => DateTime.Now
                 };
-
-
             }
             
             return await base.SaveChangesAsync(cancellationToken);

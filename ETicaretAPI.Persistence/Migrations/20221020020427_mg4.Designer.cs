@@ -4,6 +4,7 @@ using ETicaretAPI.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaretAPI.Persistence.Migrations
 {
     [DbContext(typeof(ETicaretAPIDbContext))]
-    partial class ETicaretAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221020020427_mg4")]
+    partial class mg4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
