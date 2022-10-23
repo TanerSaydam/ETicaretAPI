@@ -1,3 +1,4 @@
+using ETicaretAPI.Application;
 using ETicaretAPI.Application.Validators.Products;
 using ETicaretAPI.Infrastucture;
 using ETicaretAPI.Infrastucture.Filters;
@@ -10,9 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistencesServices();
 builder.Services.AddInfrastuctureService();
+builder.Services.AddApplicationService();
 
-builder.Services.AddStorage<LocalStorage>();
-//builder.Services.AddStorage<AzureStorage>();
+//builder.Services.AddStorage<LocalStorage>();
+builder.Services.AddStorage<AzureStorage>();
 //builder.Services.AddStorage(ETicaretAPI.Infrastucture.Enums.StorageType.Local);
 
 #pragma warning disable CS0618 // Type or member is obsolete
