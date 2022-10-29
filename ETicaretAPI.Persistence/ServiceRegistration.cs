@@ -4,6 +4,7 @@ using ETicaretAPI.Application.Repositories.InvoiceFileRepository;
 using ETicaretAPI.Application.Repositories.OrderRepository;
 using ETicaretAPI.Application.Repositories.ProductImageFileRepository;
 using ETicaretAPI.Application.Repositories.ProductRepository;
+using ETicaretAPI.Domain.Entities.Identity;
 using ETicaretAPI.Persistence.Context;
 using ETicaretAPI.Persistence.Repositories.CustomerRepository;
 using ETicaretAPI.Persistence.Repositories.FileRepository;
@@ -22,6 +23,14 @@ namespace ETicaretAPI.Persistence
         public static void AddPersistencesServices(this IServiceCollection services)
         {
             services.AddDbContext<ETicaretAPIDbContext>(options => options.UseSqlServer(Configuration.ConnectionString));
+            services.AddIdentity<AppUser, AppRole>(opt=>
+            {
+                opt.Password.RequiredLength = 3;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;                
+            }).AddEntityFrameworkStores<ETicaretAPIDbContext>();
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
             services.AddScoped<IOrderReadRepository, OrderReadRepository>();
