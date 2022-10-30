@@ -9,15 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{49EBC5D4-A233-444F-A8AE-AF5C13B3222F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaretAPI.Application", "ETicaretAPI.Application\ETicaretAPI.Application.csproj", "{2890851F-6430-4152-AD13-8E681A3B6BA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaretAPI.Application", "ETicaretAPI.Application\ETicaretAPI.Application.csproj", "{2890851F-6430-4152-AD13-8E681A3B6BA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaretAPI.Domain", "ETicaretAPI.Domain\ETicaretAPI.Domain.csproj", "{D33BB53D-3BEC-4468-A082-77628B5BFC2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaretAPI.Domain", "ETicaretAPI.Domain\ETicaretAPI.Domain.csproj", "{D33BB53D-3BEC-4468-A082-77628B5BFC2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaretAPI.Infrastucture", "ETicaretAPI.Infrastucture\ETicaretAPI.Infrastucture.csproj", "{C8CFE547-0764-4261-AD27-23EC4488041E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaretAPI.Infrastucture", "ETicaretAPI.Infrastucture\ETicaretAPI.Infrastucture.csproj", "{C8CFE547-0764-4261-AD27-23EC4488041E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaretAPI.Persistence", "ETicaretAPI.Persistence\ETicaretAPI.Persistence.csproj", "{2619042A-CD52-4194-8412-58E658DE8DE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaretAPI.Persistence", "ETicaretAPI.Persistence\ETicaretAPI.Persistence.csproj", "{2619042A-CD52-4194-8412-58E658DE8DE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaretAPI.API", "ETicaretAPI.API\ETicaretAPI.API.csproj", "{A28AE6A3-0096-4CA3-B9E6-249C4026E82C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ETicaretAPI.API", "ETicaretAPI.API\ETicaretAPI.API.csproj", "{A28AE6A3-0096-4CA3-B9E6-249C4026E82C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

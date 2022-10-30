@@ -15,6 +15,7 @@ namespace ETicaretAPI.Application.Features.Commands.AppUser.LoginUser
     public class LoginUserSuccessCommandResponse : LoginUserCommanResponse
     {
         public string AccessToken { get; set; }
+        public string RefreshToken { get; set; }
         public DateTime Expiration { get; set; }
 
     }

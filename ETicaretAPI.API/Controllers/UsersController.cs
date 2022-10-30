@@ -24,19 +24,6 @@ namespace ETicaretAPI.API.Controllers
             CreateUserCommandReponse response= await _mediator.Send(createUserCommanRequest);
             return Ok(response);
         }
-
-        [HttpPost("[action]")]
-        public async Task<IActionResult> Login(LoginUserCommanRequest loginUserCommanRequest)
-        {
-            LoginUserCommanResponse response = await _mediator.Send(loginUserCommanRequest);
-            return Ok(response);
-        }
-
-        [HttpPost("[action]")]
-        public async Task<IActionResult> GoogleLogin(GoogleLoginCommandRequest googleLoginCommanRequest)
-        {
-            GoogleLoginCommandResponse response = await _mediator.Send(googleLoginCommanRequest);
-            return Ok(response);
-        }
+        
     }
 }

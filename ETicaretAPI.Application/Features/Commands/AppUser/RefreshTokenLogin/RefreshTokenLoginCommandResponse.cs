@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ETicaretAPI.Application.DTOs
+namespace ETicaretAPI.Application.Features.Commands.AppUser.RefreshTokenLogin
 {
-    public class Token
+    public class RefreshTokenLoginCommandResponse
     {
         public string AccessToken { get; set; }
-        public DateTime Expiration { get; set; }
         public string RefreshToken { get; set; }
+        public DateTime Expiration { get; set; }
+
     }
 }

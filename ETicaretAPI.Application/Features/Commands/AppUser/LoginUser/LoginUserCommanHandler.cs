@@ -1,4 +1,5 @@
-﻿using ETicaretAPI.Application.Abstractions.Token;
+﻿using ETicaretAPI.Application.Abstractions.Services.Authentications;
+using ETicaretAPI.Application.Abstractions.Token;
 using ETicaretAPI.Application.DTOs;
 using ETicaretAPI.Application.Exceptions;
 using MediatR;
@@ -14,46 +15,23 @@ namespace ETicaretAPI.Application.Features.Commands.AppUser.LoginUser
 {
     public class LoginUserCommanHandler : IRequestHandler<LoginUserCommanRequest, LoginUserCommanResponse>
     {
-        private readonly UserManager<Domain.Entities.Identity.AppUser> _userManager;
-        private readonly SignInManager<Domain.Entities.Identity.AppUser> _signInManager;
-        private readonly ITokenHandler _tokenHandler;
-        public LoginUserCommanHandler(
-            UserManager<Domain.Entities.Identity.AppUser> userManager,
-            SignInManager<Domain.Entities.Identity.AppUser> signInManager,
-            ITokenHandler tokenHandler)
+        private readonly IInternalAuthentication _authService;
+
+        public LoginUserCommanHandler(IInternalAuthentication authService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _tokenHandler = tokenHandler;
+            _authService = authService;
         }
 
         public async Task<LoginUserCommanResponse> Handle(LoginUserCommanRequest request, CancellationToken cancellationToken)
         {
-            Domain.Entities.Identity.AppUser user = await _userManager.FindByNameAsync(request.UsernameOrEmail);
+            Token token = await _authService.LoginAsync(request.UsernameOrEmail, request.Password, 45);
 
-            if(user == null)
-                user = await _userManager.FindByEmailAsync(request.UsernameOrEmail);
-
-            if (user == null)
-                throw new NotFoundUserException();
-
-            SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
-
-            if (result.Succeeded)
+            return new LoginUserSuccessCommandResponse()
             {
-                Token token = _tokenHandler.CreateAccessToken(5);
-                return new LoginUserSuccessCommandResponse()
-                {
-                    AccessToken = token.AccessToken,
-                    Expiration = token.Expiration
-                };
-            }            
-
-            throw new AuthenticationErrorException("Kimlik doğrulama başarısız!");
-            //return new LoginUserErrorCommandResponse()
-            //{
-            //    Message = "Kullanıcı adı ya da şifre hatalı"
-            //};
+                AccessToken = token.AccessToken,
+                RefreshToken = token.RefreshToken,
+                Expiration = token.Expiration
+            };            
         }
     }
 }

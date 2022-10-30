@@ -1,10 +1,13 @@
 ﻿using ETicaretAPI.Application.Abstractions.Token;
+using ETicaretAPI.Domain.Entities.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +22,7 @@ namespace ETicaretAPI.Infrastucture.Services.Token
             _configuration = configuration;
         }
 
-        public Application.DTOs.Token CreateAccessToken(int min)
+        public Application.DTOs.Token CreateAccessToken(int second, AppUser user)
         {
             Application.DTOs.Token token = new();
 
@@ -30,19 +33,32 @@ namespace ETicaretAPI.Infrastucture.Services.Token
             SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
             //Oluşturulacak token ayarlarını veriyoruz
-            token.Expiration = DateTime.UtcNow.AddMinutes(min);
+            token.Expiration = DateTime.Now.AddMinutes(second);
 
             JwtSecurityToken securityToken = new(
                 audience: _configuration["Token:Audience"],
                 issuer: _configuration["Token:Issuer"],
                 expires: token.Expiration,
-                notBefore: DateTime.UtcNow,
-                signingCredentials: signingCredentials
+                notBefore: DateTime.Now,
+                signingCredentials: signingCredentials,
+                claims: new List<Claim> { new(ClaimTypes.Name, user.NameSurname) }
             );
 
             JwtSecurityTokenHandler tokenHandler = new();
             token.AccessToken = tokenHandler.WriteToken(securityToken);
+
+            token.RefreshToken = CreateRefreshToken();             
+
             return token;
+        }
+
+        public string CreateRefreshToken()
+        {
+            byte[] number = new byte[32];
+            using RandomNumberGenerator random = RandomNumberGenerator.Create();
+            random.GetBytes(number);
+
+            return Convert.ToBase64String(number);
         }
     }
 }
